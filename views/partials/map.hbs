@@ -1,0 +1,27 @@
+<div id="map" style="height: 350px; margin-bottom: 20px;"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var map = L.map('map').setView([40.4189, -3.6919], 2); // Default view centered to Madrid
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        const cities = [
+            {{#each cities}}
+                {
+                    name: "{{{this.city.name}}}",
+                    latitude: {{{this.city.latitude}}},
+                    longitude: {{{this.city.longitude}}}
+                }{{#unless @last}},{{/unless}} //adds a seperator in the list
+            {{/each}}
+        ];
+
+        cities.forEach(function(city) {
+            var marker = L.marker([city.latitude, city.longitude]).addTo(map);
+            marker.bindPopup('<a href="/city/' + city.name + '">'+ city.name +'</a>');
+        });
+    });
+</script>
+

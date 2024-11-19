@@ -1,0 +1,60 @@
+{{#each cities}}
+    <div class="border p-2 my-3 position-relative">
+        <div class="container overflow-hidden text-left">
+            <div class="row gx-6">
+                <div class="col">
+                    <div class="rounded bg-dark text-light p-3 my-2 {{# if maxTemperature}}box-large{{else}}box-default{{/if}}">
+                    <b>{{this.city.name}}</b><br>lat: {{this.city.latitude}}<br>lon: {{this.city.longitude}}</div>
+                </div>
+                <div class="col">
+                    <div class="rounded bg-dark text-light p-3 my-2 position-relative {{# if maxTemperature}}box-large{{else}}box-default{{/if}}">
+                    <b>Wetter</b>
+                    <br>{{#if this.latestReading}}{{{getWeatherCondition this.latestReading.weather_code}}}{{else}}Keine Wetterdaten{{/if}}
+                    <span class="icon-top-right">{{{getWeatherIcon this.latestReading.weather_code}}}</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="rounded bg-dark text-light p-3 my-2 position-relative {{# if maxTemperature}}box-large{{else}}box-default{{/if}}">
+                    <b>Temperatur</b>
+                    <br>{{#if this.latestReading}}{{this.latestReading.temperature}} °C <br>Max: {{this.maxTemperature}}<br>Min: {{this.minTemperature}}{{else}}Keine Wetterdaten{{/if}}
+                    <span class="icon-top-right"><i class="bi bi-thermometer-half h3"></i></span>
+                    <span class="icon-top-right-second">{{{getArrowIcon this.latestReading.temperature this.previousReading.temperature}}}</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="rounded bg-dark text-light p-3 my-2 position-relative {{# if maxTemperature}}box-large{{else}}box-default{{/if}}">
+                    <b>Wind</b>
+                    <br>{{#if this.latestReading}}{{this.latestReading.wind_speed}} bft<br>{{{getWindDirection this.latestReading.wind_direction}}}<br>Max: {{this.maxWindSpeed}}<br>Min: {{this.minWindSpeed}}{{else}}Keine Wetterdaten{{/if}}
+                    <span class="icon-top-right"><i class="bi bi-wind h3"></i></span>
+                    <span class="icon-top-right-second">{{{getArrowIcon this.latestReading.wind_speed this.previousReading.wind_speed}}}</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="rounded bg-dark text-light p-3 my-2 position-relative {{# if maxTemperature}}box-large{{else}}box-default{{/if}}">
+                    <b>Luftdruck</b>
+                    <br>{{#if this.latestReading}}{{this.latestReading.air_pressure}} hpa <br>Max: {{this.maxAirPressure}}<br>Min: {{this.minAirPressure}}{{else}}Keine Wetterdaten{{/if}}
+                    <span class="icon-top-right"><i class="bi bi-speedometer h3"></i></span>
+                    <span class="icon-top-right-second">{{{getArrowIcon this.latestReading.air_pressure this.previousReading.air_pressure}}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{#unless readings}}
+            <div class="row">
+                <div class="p-2 my-2">
+                    <a class="btn btn-secondary" href="/city/{{this.city.name}}" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
+                            <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z"/>
+                        </svg>
+                    </a>
+                    <a class="btn btn-secondary" href="/dashboard/deletecity/{{this.city.name}}" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        {{/unless}}
+    </div>
+{{/each}}

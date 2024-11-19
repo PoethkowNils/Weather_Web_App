@@ -1,0 +1,33 @@
+<form action="/city/{{name}}/addreading" method="POST">
+    <div class="row">
+        <div class="col">
+            <label for="inputWeather" class="form-label">Wettercode</label>
+            <select class="form-control mb-2" id="inputWeather" name="weather">
+                <option value="200">200-Gewitter</option>
+                <option value="300">300-Niesel</option>
+                <option value="500">500-Regen</option>
+                <option value="600">600-Schnee</option>
+                <option value="700">700-Nebel</option>
+                <option value="800">800-Sonnenschein</option>
+                <option value="801">801-Bewölkt</option>
+            </select>
+        </div>
+        <div class="col">
+            <label for="inputTemperature" class="form-label">Temperatur</label>
+            <input placeholder="00.00" type="number" step="0.01" class="form-control mb-2" id="inputTemperature" name="temperature">
+        </div>
+        <div class="col">
+            <label for="inputWindSpeed" class="form-label">Windgeschwindigkeit</label>
+            <input placeholder="00.00" type="number" step="0.01" class="form-control mb-2" id="inputWindSpeed" min="0" name="windSpeed">
+        </div>
+        <div class="col">
+            <label for="inputWindDirection" class="form-label">Windrichtung</label>
+            <input placeholder="000" type="number" class="form-control mb-2" id="inputWindDirection" min="0"  max="360" name="windDirection">
+        </div>
+        <div class="col">
+            <label for="inputPressure" class="form-label">Luftdruck</label>
+            <input placeholder="0000.00" type="number" step="0.01" class="form-control mb-2" id="inputPressure" min="0" name="pressure">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mb-3">Messung hinzufügen</button>
+</form>
